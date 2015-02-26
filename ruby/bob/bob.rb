@@ -3,7 +3,7 @@ class Bob
 
   def hey(remark)
     @remark = remark
-    silence || shouting || question || gibberish || unknown
+    silence or shouting or question or gibberish or unknown
   end
 
   private
