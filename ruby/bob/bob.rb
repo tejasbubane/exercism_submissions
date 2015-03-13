@@ -3,48 +3,34 @@ class Bob
 
   def hey(remark)
     @remark = remark
-    silence or shouting or question or gibberish or unknown
+    REPLY.fetch(type)
   end
 
   private
 
-  def silence
-    'Fine. Be that way!' if silence?
+  REPLY = {
+    silence: 'Fine. Be that way!',
+    shouting: 'Whoa, chill out!',
+    question: 'Sure.',
+    unknown: 'Whatever.'
+  }
+
+  def type
+    return :silence if silence?
+    return :shouting if shouting?
+    return :question if question?
+    :unknown
   end
 
   def silence?
     remark.strip.empty?
   end
 
-  def shouting
-    'Whoa, chill out!' if shouting?
-  end
-
   def shouting?
-    remark.upcase == remark && !only_numbers?
-  end
-
-  def only_numbers?
-    remark[/[^a-zA-Z]+/] == remark
-  end
-
-  def question
-    'Sure.' if question?
+    remark.upcase == remark && remark[/[^a-zA-Z]+/] != remark
   end
 
   def question?
     remark.end_with?('?')
-  end
-
-  def gibberish
-    'Whoa, chill out!' if gibberish?
-  end
-
-  def gibberish?
-    !remark.include?(' ')
-  end
-
-  def unknown
-    'Whatever.'
   end
 end
