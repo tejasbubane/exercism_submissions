@@ -1,7 +1,9 @@
 package leap
 
 func IsLeapYear(year int) bool {
-	if IsDivisibleBy(year, 4) && !IsDivisibleBy(year, 100) || IsDivisibleBy(year, 400) {
+	if IsDivisibleBy(year, 4) &&
+		!IsDivisibleBy(year, 100) ||
+		IsDivisibleBy(year, 400) {
 		return true
 	} else {
 		return false
