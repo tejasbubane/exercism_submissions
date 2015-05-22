@@ -19,9 +19,8 @@ class Prime
   end
 
   def has_factors?(n)
-    (3..Math.sqrt(n).to_i).each do |divisor|
-      return false if n % divisor == 0
+    !(3..Math.sqrt(n).to_i).detect do |divisor|
+      n % divisor == 0
     end
-    return true
   end
 end
