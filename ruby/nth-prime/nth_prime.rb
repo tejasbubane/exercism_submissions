@@ -19,7 +19,7 @@ class Prime
   end
 
   def has_factors?(n)
-    !(3..Math.sqrt(n).to_i).detect do |divisor|
+    (3..Math.sqrt(n).to_i).none? do |divisor|
       n % divisor == 0
     end
   end
