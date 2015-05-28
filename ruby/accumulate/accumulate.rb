@@ -1,9 +1,13 @@
 class Array
   def accumulate
-    result = []
-    each do |item|
-      result << yield(item)
+    if block_given?
+      result = []
+      each do |item|
+        result << yield(item)
+      end
+      result
+    else
+      to_enum
     end
-    result
   end
 end
