@@ -2,6 +2,16 @@ class SpaceAge
 
   attr_reader :seconds
 
+  PLANETS = {
+    mercury: 0.2408467,
+    venus: 0.61519726,
+    mars: 1.8808158,
+    jupiter: 11.862615,
+    saturn: 29.447498,
+    uranus: 84.016846,
+    neptune: 164.79132
+  }
+
   def initialize(seconds)
     @seconds = seconds.to_f
   end
@@ -10,31 +20,9 @@ class SpaceAge
     seconds / 31_557_600
   end
 
-  def on_mercury
-    on_earth / 0.2408467
-  end
-
-  def on_venus
-    on_earth / 0.61519726
-  end
-
-  def on_mars
-    on_earth / 1.8808158
-  end
-
-  def on_jupiter
-    on_earth / 11.862615
-  end
-
-  def on_saturn
-    on_earth / 29.447498
-  end
-
-  def on_uranus
-    on_earth / 84.016846
-  end
-
-  def on_neptune
-    on_earth / 164.79132
+  PLANETS.each do |planet, ratio|
+    define_method("on_#{planet}") do
+      on_earth / ratio
+    end
   end
 end
