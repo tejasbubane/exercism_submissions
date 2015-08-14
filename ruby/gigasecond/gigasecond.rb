@@ -1,5 +1,7 @@
 module Gigasecond
+  GIGA = 10**9
+
   def self.from(timestamp)
-    timestamp + 10**9
+    timestamp + GIGA
   end
 end
