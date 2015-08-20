@@ -15,7 +15,11 @@ class Phrase
   private
 
   def words
-    phrase.downcase.scan(/[a-zA-Z0-9']+/)
+    remove_single_quotes.downcase.scan(/[\w']+/)
+  end
+
+  def remove_single_quotes
+    phrase.gsub(/\s'|'\s/, " ")
   end
 
 end
