@@ -27,7 +27,7 @@ class Clock
   end
 
   def ==(other)
-    other.instance_of?(Clock) &&
+    other.is_a?(Clock) &&
       hours == other.hours && minutes == other.minutes
   end
 
