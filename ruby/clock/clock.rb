@@ -4,12 +4,16 @@ class Clock
     new(hrs, mins)
   end
 
-  attr_reader :hrs, :mins
-
   def initialize(hrs, mins = 0)
-    @hrs = hrs
-    @mins = mins
     @abs_mins = hrs * 60 + mins
+  end
+
+  def hours
+    @hours ||= @abs_mins / 60
+  end
+
+  def minutes
+    @minutes ||= @abs_mins % 60
   end
 
   def +(number)
@@ -23,11 +27,12 @@ class Clock
   end
 
   def ==(other)
-    other.instance_of?(Clock) && hrs == other.hrs && mins == other.mins
+    other.instance_of?(Clock) &&
+      hours == other.hours && minutes == other.minutes
   end
 
   def to_s
-    "#{double_digit(hrs)}:#{double_digit(mins)}"
+    "#{double_digit(hours)}:#{double_digit(minutes)}"
   end
 
   private
@@ -36,8 +41,8 @@ class Clock
     number < 10 ? "0#{number}" : number.to_s
   end
 
-  def clock_from(number)
-    [number / 60, number % 60]
+  def clock_from(total_minutes)
+    [total_minutes / 60, total_minutes % 60]
   end
 
 end
