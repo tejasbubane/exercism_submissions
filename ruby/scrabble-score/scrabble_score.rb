@@ -26,6 +26,8 @@ class Scrabble
   private
 
   def points(alphabet)
-    SCORES.select { |key, value| value.include? alphabet.upcase }.keys.first || 0
+    SCORES.select do |key, value|
+      value.include? alphabet.upcase
+    end.keys.first.to_i
   end
 end
