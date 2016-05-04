@@ -1,8 +1,8 @@
-var Hamming = function() {
+module.exports = function() {
   return {
     compute: function(strand_1, strand_2) {
       if(strand_1.length !== strand_2.length) {
-        throw new Error('DNA strands must be of equal length.');
+        throw 'DNA strands must be of equal length.';
       }
 
       return this._getDifference(strand_1, strand_2);
@@ -19,5 +19,3 @@ var Hamming = function() {
     }
   }
 }
-
-module.exports = Hamming;
