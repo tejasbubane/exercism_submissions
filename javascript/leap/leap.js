@@ -1,4 +1,4 @@
-var Year = function (year) {
+module.exports = function (year) {
   return {
     year: year,
 
@@ -11,5 +11,3 @@ var Year = function (year) {
     }
   }
 }
-
-module.exports = Year
