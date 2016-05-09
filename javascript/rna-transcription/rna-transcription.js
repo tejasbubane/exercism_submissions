@@ -2,19 +2,17 @@ module.exports = function() {
 
   return {
     toRna: function(dna) {
-      var rna = '';
-      for(var i=0; i< dna.length; i++) {
-        rna += this._RnaMapping[dna[i]];
-      }
+      var nucleotides = dna.split(''),
+          rnaMapping = {
+            'G': 'C',
+            'C': 'G',
+            'T': 'A',
+            'A': 'U'
+          };
 
-      return rna;
-    },
-
-    _RnaMapping: {
-      'G': 'C',
-      'C': 'G',
-      'T': 'A',
-      'A': 'U'
+      return nucleotides.reduce(function(rna, nucleotide) {
+        return rna + rnaMapping[nucleotide];
+      }, '');
     }
   }
 
