@@ -1,0 +1,3 @@
+**/*/.version
+clojure/**/.lein-failures
+clojure/**/target
