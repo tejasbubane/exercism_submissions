@@ -1,3 +1,5 @@
 **/*/.version
 clojure/**/.lein-failures
 clojure/**/target
+clojure/**/.lein-repl-history
+clojure/**/.nrepl-port
