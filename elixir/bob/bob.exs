@@ -1,13 +1,13 @@
-defmodule Teenager do
+defmodule Bob do
 
   def hey(input) do
     cond do
+      question?(input) ->
+        "Sure."
       silence?(input) ->
         "Fine. Be that way!"
       shouting?(input) && !numbers?(input) ->
         "Whoa, chill out!"
-      question?(input) ->
-        "Sure."
       true ->
         "Whatever."
     end
