@@ -20,7 +20,7 @@ defmodule Accumulate do
     _accumulate(list, fun, [])
   end
 
-  def _accumulate([], fun, acc), do: acc
+  def _accumulate([], _fun, acc), do: acc
   def _accumulate([hd | tl], fun, acc) do
     _accumulate(tl, fun, acc ++ [fun.(hd)])
   end

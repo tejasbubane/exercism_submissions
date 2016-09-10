@@ -28,10 +28,10 @@ defmodule AccumulateTest do
     assert Accumulate.accumulate(words, fun) == expected
   end
 
-  test "accumulate recursively" do
+  test "nested accumulate" do
     chars = ~w(a b c)
     nums  = ~w(1 2 3)
-    fun = fn(c) -> for num <- nums, do: c <> num end
+    fun = fn(c) -> Accumulate.accumulate(nums, &(c <> &1)) end
     expected = [["a1", "a2", "a3"], ["b1", "b2", "b3"], ["c1", "c2", "c3"]]
     assert Accumulate.accumulate(chars, fun) == expected
   end
