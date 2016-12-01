@@ -3,3 +3,7 @@ clojure/**/.lein-failures
 clojure/**/target
 clojure/**/.lein-repl-history
 clojure/**/.nrepl-port
+ecmascript/*/node_modules
+ecmascript/*/babel-output
+ecmascript/*/yarn.lock
+ecmascript/*/yarn-error.log
