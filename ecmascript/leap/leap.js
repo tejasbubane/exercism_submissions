@@ -1,5 +1,18 @@
-var checkLeap = function(year) {
-  return (year % 400 === 0 || year % 4 === 0 && !(year % 100 === 0));
+class LeapChecker {
+  constructor(year) {
+    this.year = year;
+  }
+
+  check() {
+    return this._divisibleBy(400) ||
+             this._divisibleBy(4) && !this._divisibleBy(100);
+  }
+
+  _divisibleBy(number) {
+    return this.year % number === 0;
+  }
 }
 
-export default checkLeap;
+export default function(year) {
+  return new LeapChecker(year).check();
+}
