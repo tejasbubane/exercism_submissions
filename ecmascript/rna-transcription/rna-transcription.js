@@ -1,10 +1,21 @@
 class Transcriptor {
+  check(nucleotides) {
+    return nucleotides.every((n) => this.complement(n) !== undefined);
+  }
+
   toRna(strand) {
-    return (
-      strand.split('')
-        .map((nucleotide) => this.complement(nucleotide))
-        .join('')
-    );
+    let nucleotides = strand.split('');
+
+    if (this.check(nucleotides)) {
+      return (
+        nucleotides
+          .map((nucleotide) => this.complement(nucleotide))
+          .join('')
+      );
+    }
+    else {
+      return null;
+    }
   }
 
   complement(nucleotide) {

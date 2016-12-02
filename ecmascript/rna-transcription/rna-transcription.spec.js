@@ -22,4 +22,16 @@ describe('Transcriptor', () => {
   it('transcribes all dna nucleotides to their rna complements', () => {
     expect(transcriptor.toRna('ACGTGGTCTTAA')).toEqual('UGCACCAGAAUU');
   });
+
+  it('correctly handles invalid input', () => {
+    expect(transcriptor.toRna('U')).toEqual(null);
+  });
+
+  it('correctly handles completely invalid input', () => {
+    expect(transcriptor.toRna('XXX')).toEqual(null);
+  });
+
+  it('correctly handles partially invalid input', () => {
+    expect(transcriptor.toRna('ACGTXXXCTTAA')).toEqual(null);
+  });
 });
