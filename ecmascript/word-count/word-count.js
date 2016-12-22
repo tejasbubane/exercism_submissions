@@ -7,6 +7,6 @@ export default class WordCount {
       if(!(typeof(counts[word]) === 'number')) { counts[word] = 0; } // initialize
       counts[word] += 1;
       return counts;
-    }, {})
+    }, {});
   }
 }
