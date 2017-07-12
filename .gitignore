@@ -8,3 +8,4 @@ ecmascript/*/babel-output
 ecmascript/*/yarn.lock
 ecmascript/*/yarn-error.log
 erlang/*/_build/
+ocaml/**/_build/
