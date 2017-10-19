@@ -7,6 +7,10 @@
             do not use List.map from the standard basis
 *)
 fun accumulate (f: 'a -> 'b, xs: 'a list) : 'b list =
-  case xs of
-      [] => []
-    | x::xs' => f(x)::accumulate(f, xs')
+  let fun accumulate_tail_rec (acc, xs) =
+        case xs of
+            [] => acc
+          | x::xs' => rev(accumulate_tail_rec(f(x)::acc, xs'))
+  in
+      accumulate_tail_rec([], xs)
+  end
