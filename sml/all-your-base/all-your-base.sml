@@ -1,3 +1,6 @@
+infix |>
+fun x |> f = f x
+
 fun rebase (input_base: int, input_digits: int list,
             output_base: int): int list option =
   let val all_zero = List.all (fn x => x = 0) input_digits
@@ -27,5 +30,5 @@ fun rebase (input_base: int, input_digits: int list,
       then NONE
       else case input_digits of
                [] => NONE
-             | _ => SOME (to_output_base [] (to_base_ten 0 input_digits))
+             | _ => input_digits |> to_base_ten 0 |> to_output_base [] |> SOME
   end
