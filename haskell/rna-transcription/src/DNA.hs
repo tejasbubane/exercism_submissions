@@ -8,4 +8,4 @@ convert 'A' = Just 'U'
 convert _   = Nothing
 
 toRNA :: String -> Maybe String
-toRNA xs = sequence $ map convert xs
+toRNA = mapM convert
