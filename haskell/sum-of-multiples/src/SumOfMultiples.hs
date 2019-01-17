@@ -5,5 +5,6 @@ import Data.List (nub)
 
 sumOfMultiples :: [Integer] -> Integer -> Integer
 sumOfMultiples factors limit =
-  sum . nub . map fst . filter ((== 0) . uncurry mod) $ liftM2 (,) range factors
+  sum . nub . map fst . filter divisible $ liftM2 (,) range factors
   where range = [1..(limit-1)]
+        divisible = ((== 0) . uncurry mod)
