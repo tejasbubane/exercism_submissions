@@ -1,9 +1,9 @@
 module SumOfMultiples (sumOfMultiples) where
 
+import Control.Monad (liftM2)
+import Data.List (nub)
+
 sumOfMultiples :: [Integer] -> Integer -> Integer
 sumOfMultiples factors limit =
-  let takeMultiple acc num =
-        if any (\x -> num `mod` x == 0) factors
-        then acc + num
-        else acc
-  in foldl takeMultiple 0 [1..(limit - 1)]
+  sum . nub . map fst . filter ((== 0) . uncurry mod) $ liftM2 (,) range factors
+  where range = [1..(limit-1)]
