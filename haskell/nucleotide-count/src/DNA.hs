@@ -1,26 +1,24 @@
-module DNA (nucleotideCounts) where
+module DNA (nucleotideCounts, Nucleotide(..)) where
 
-import qualified Data.Map.Lazy as Map
+import Data.Map (Map, insertWith, fromList)
 
-dna :: String
-dna = "ACGT"
+data Nucleotide = A | C | G | T deriving (Eq, Ord, Show)
 
-countMap :: Map.Map Char Int
-countMap = Map.fromList [(x, 0) | x <- dna]
+type NucleotideCounts = Map Nucleotide Int
 
-type NucleotideCount = Either String (Map.Map Char Int)
+makeNucleotide :: Char -> Either String Nucleotide
+makeNucleotide 'A' = Right A
+makeNucleotide 'C' = Right C
+makeNucleotide 'G' = Right G
+makeNucleotide 'T' = Right T
+makeNucleotide _   = Left "Invalid nucleotide"
 
-validate :: Char -> Either String Char
-validate x =
-  if x `elem` dna
-  then Right x
-  else Left "Invalid DNA"
+countDNA :: Either String NucleotideCounts -> Char -> Either String NucleotideCounts
+countDNA e@(Left _) _ = e
+countDNA (Right m) x =
+  case makeNucleotide x of
+    Left e  -> Left e
+    Right n -> Right $ insertWith (+) n 1 m
 
-countOne :: Char -> NucleotideCount -> NucleotideCount
-countOne x acc = do
-  x' <- validate x
-  acc' <- acc
-  return $ Map.insertWith (+) x' 1 acc'
-
-nucleotideCounts :: String -> NucleotideCount
-nucleotideCounts = foldr countOne (Right countMap)
+nucleotideCounts :: String -> Either String NucleotideCounts
+nucleotideCounts xs = foldl countDNA (Right $ fromList [(A, 0), (C, 0), (G, 0), (T, 0)]) xs

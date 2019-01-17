@@ -1,2 +1,1 @@
-resolver: lts-12.9
-system-ghc: true
+resolver: lts-12.4
