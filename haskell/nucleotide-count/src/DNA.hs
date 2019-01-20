@@ -10,9 +10,9 @@ type NucleotideCounts = Map Nucleotide Int
 
 countDNA :: NucleotideCounts -> Char -> Either String NucleotideCounts
 countDNA m x =
-  case readEither [x] of
-    Left e  -> Left e
-    Right n -> Right $ insertWith (+) n 1 m
+  readEither [x] >>=
+    \n -> return $ insertWith (+) n 1 m
 
 nucleotideCounts :: String -> Either String NucleotideCounts
-nucleotideCounts xs = foldM countDNA (fromList [(A, 0), (C, 0), (G, 0), (T, 0)]) xs
+nucleotideCounts xs =
+  foldM countDNA (fromList [(A, 0), (C, 0), (G, 0), (T, 0)]) xs
