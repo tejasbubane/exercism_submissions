@@ -10,3 +10,5 @@ ecmascript/*/yarn-error.log
 erlang/*/_build/
 ocaml/**/_build/
 haskell/**/.stack-work
+
+metadata.json
