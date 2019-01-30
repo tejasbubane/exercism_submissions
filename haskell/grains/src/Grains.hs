@@ -1,6 +1,6 @@
 module Grains (square, total) where
 
-import Data.Maybe (fromJust)
+import Data.Maybe (mapMaybe)
 
 square :: Integer -> Maybe Integer
 square n
@@ -8,4 +8,4 @@ square n
   | otherwise         = Nothing
 
 total :: Integer
-total = sum $ fmap (fromJust . square) [1..64]
+total = sum $ mapMaybe square [1..64]
