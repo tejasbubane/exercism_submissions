@@ -7,6 +7,10 @@ ecmascript/*/node_modules
 ecmascript/*/babel-output
 ecmascript/*/yarn.lock
 ecmascript/*/yarn-error.log
+javascript/*/node_modules
+javascript/*/babel-output
+javascript/*/yarn.lock
+javascript/*/yarn-error.log
 erlang/*/_build/
 ocaml/**/_build/
 haskell/**/.stack-work
