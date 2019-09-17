@@ -26,7 +26,6 @@
   (:pan-area-code (parts num-string)))
 
 (defn pretty-print [num-string]
-  (let [phone (parts num-string)]
-    (str "(" (:pan-area-code phone) ") "
-         (:exchange-code phone) "-"
-         (:subscriber-number phone))))
+  (let [{:keys [pan-area-code exchange-code subscriber-number]}
+        (parts num-string)]
+    (str "(" pan-area-code ") " exchange-code "-" subscriber-number)))
