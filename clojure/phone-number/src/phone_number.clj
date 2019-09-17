@@ -23,7 +23,7 @@
      :subscriber-number (subs cleaned-number 6)}))
 
 (defn area-code [num-string]
-  (subs (number num-string) 0 3))
+  (:pan-area-code (parts num-string)))
 
 (defn pretty-print [num-string]
   (let [phone (parts num-string)]
