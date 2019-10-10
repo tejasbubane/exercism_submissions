@@ -6,12 +6,10 @@
        (map #(Character/digit % 10))))
 
 (defn- exp [base pow]
-  (loop [acc 1
-         base base
-         pow pow]
-    (if (= pow 1)
-      (* base acc)
-      (recur (* acc base) base (- pow 1)))))
+  (reduce
+   (fn [acc i] (* acc base))
+   1
+   (take pow (range))))
 
 (defn armstrong? [num]
   (let [digits (split-digits num)
