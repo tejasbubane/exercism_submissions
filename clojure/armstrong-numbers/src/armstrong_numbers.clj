@@ -3,13 +3,15 @@
 (defn- split-digits [num]
   (->> num
        (str)
-       (seq)
        (map #(Character/digit % 10))))
 
 (defn- exp [base pow]
-  (if (= pow 1)
-    base
-    (* base (exp base (- pow 1)))))
+  (loop [acc 1
+         base base
+         pow pow]
+    (if (= pow 1)
+      (* base acc)
+      (recur (* acc base) base (- pow 1)))))
 
 (defn armstrong? [num]
   (let [digits (split-digits num)
