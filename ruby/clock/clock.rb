@@ -1,48 +1,29 @@
 class Clock
+  attr_reader :hours, :minutes
 
-  def self.at(hrs, mins = 0)
-    new(hrs, mins)
-  end
-
-  def initialize(hrs, mins = 0)
-    @abs_mins = hrs * 60 + mins
-  end
-
-  def hours
-    @hours ||= @abs_mins / 60
-  end
-
-  def minutes
-    @minutes ||= @abs_mins % 60
-  end
-
-  def +(number)
-    hrs, mins = clock_from(@abs_mins + number)
-    Clock.new(hrs % 24, mins)
-  end
-
-  def -(number)
-    hrs, mins = clock_from(@abs_mins - number)
-    Clock.new(hrs % 24, mins)
-  end
-
-  def ==(other)
-    other.is_a?(Clock) &&
-      hours == other.hours && minutes == other.minutes
+  def initialize(hour: 0, minute: 0)
+    @hours = (hour + (minute / 60)) % 24
+    @minutes = minute % 60
   end
 
   def to_s
-    "#{double_digit(hours)}:#{double_digit(minutes)}"
+    pad_hours = hours < 10 ? "0#{hours}" : hours.to_s
+    pad_minutes = minutes < 10 ? "0#{minutes}" : minutes.to_s
+    "#{pad_hours}:#{pad_minutes}"
   end
 
-  private
-
-  def double_digit(number)
-    number < 10 ? "0#{number}" : number.to_s
+  def +(other)
+    Clock.new(hour: self.hours + other.hours,
+              minute: self.minutes + other.minutes)
   end
 
-  def clock_from(total_minutes)
-    [total_minutes / 60, total_minutes % 60]
+  def -(other)
+    Clock.new(hour: self.hours - other.hours,
+              minute: self.minutes - other.minutes)
   end
 
+  def ==(other)
+    self.hours == other.hours &&
+      self.minutes == other.minutes
+  end
 end
