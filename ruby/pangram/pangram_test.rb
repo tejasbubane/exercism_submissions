@@ -1,47 +1,66 @@
-#!/usr/bin/env ruby
-# encoding: utf-8
-gem 'minitest', '>= 5.0.0'
 require 'minitest/autorun'
 require_relative 'pangram'
 
-# Test data version:
-# eb8d142 Merge pull request #220 from IanWhitney/sieve_ordering
-
+# Common test data version: 1.4.1 2c020bc
 class PangramTest < Minitest::Test
   def test_sentence_empty
-    str = ''
-    refute Pangram.is_pangram?(str)
+    # skip
+    sentence = ''
+    result = Pangram.pangram?(sentence)
+    refute result, "Expected false, got: #{result.inspect}. #{sentence.inspect} is NOT a pangram"
+  end
+
+  def test_recognizes_a_perfect_lower_case_pangram
+    sentence = 'abcdefghijklmnopqrstuvwxyz'
+    result = Pangram.pangram?(sentence)
+    assert result, "Expected true, got: #{result.inspect}. #{sentence.inspect} IS a pangram"
   end
 
   def test_pangram_with_only_lower_case
-    str = 'the quick brown fox jumps over the lazy dog'
-    assert Pangram.is_pangram?(str)
+    sentence = 'the quick brown fox jumps over the lazy dog'
+    result = Pangram.pangram?(sentence)
+    assert result, "Expected true, got: #{result.inspect}. #{sentence.inspect} IS a pangram"
   end
 
   def test_missing_character_x
-    str = 'a quick movement of the enemy will jeopardize five gunboats'
-    refute Pangram.is_pangram?(str)
+    sentence = 'a quick movement of the enemy will jeopardize five gunboats'
+    result = Pangram.pangram?(sentence)
+    refute result, "Expected false, got: #{result.inspect}. #{sentence.inspect} is NOT a pangram"
+  end
+
+  def test_missing_character_h
+    sentence = 'five boxing wizards jump quickly at it'
+    result = Pangram.pangram?(sentence)
+    refute result, "Expected false, got: #{result.inspect}. #{sentence.inspect} is NOT a pangram"
+  end
+
+  def test_pangram_with_underscores
+    sentence = 'the_quick_brown_fox_jumps_over_the_lazy_dog'
+    result = Pangram.pangram?(sentence)
+    assert result, "Expected true, got: #{result.inspect}. #{sentence.inspect} IS a pangram"
+  end
+
+  def test_pangram_with_numbers
+    sentence = 'the 1 quick brown fox jumps over the 2 lazy dogs'
+    result = Pangram.pangram?(sentence)
+    assert result, "Expected true, got: #{result.inspect}. #{sentence.inspect} IS a pangram"
+  end
+
+  def test_missing_letters_replaced_by_numbers
+    sentence = '7h3 qu1ck brown fox jumps ov3r 7h3 lazy dog'
+    result = Pangram.pangram?(sentence)
+    refute result, "Expected false, got: #{result.inspect}. #{sentence.inspect} is NOT a pangram"
   end
 
   def test_pangram_with_mixed_case_and_punctuation
-    str = '"Five quacking Zephyrs jolt my wax bed."'
-    assert Pangram.is_pangram?(str)
+    sentence = '"Five quacking Zephyrs jolt my wax bed."'
+    result = Pangram.pangram?(sentence)
+    assert result, "Expected true, got: #{result.inspect}. #{sentence.inspect} IS a pangram"
   end
 
-  def test_pangram_with_non_ascii_characters
-    str = 'Victor jagt zwölf Boxkämpfer quer über den großen Sylter Deich.'
-    assert Pangram.is_pangram?(str)
-  end
-
-  # Problems in exercism evolve over time,
-  # as we find better ways to ask questions.
-  # The version number refers to the version of the problem you solved,
-  # not your solution.
-  #
-  # Define a constant named VERSION inside of Pangram.
-  # If you are curious, read more about constants on RubyDoc:
-  # http://ruby-doc.org/docs/ruby-doc-bundle/UsersGuide/rg/constants.html
-  def test_bookkeeping
-    assert_equal 1, Pangram::VERSION
+  def test_upper_and_lower_case_versions_of_the_same_character_should_not_be_counted_separately
+    sentence = 'the quick brown fox jumps over with lazy FX'
+    result = Pangram.pangram?(sentence)
+    refute result, "Expected false, got: #{result.inspect}. #{sentence.inspect} is NOT a pangram"
   end
 end
