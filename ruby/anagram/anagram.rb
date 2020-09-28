@@ -1,21 +1,17 @@
+# frozen_string_literal: true
+
 class Anagram
+  attr_reader :word, :letters
+
   def initialize(word)
-    @word = word
+    @word = word.downcase
+    @letters = word.downcase.split('').sort
   end
 
   def match(candidates)
     candidates.select do |candidate|
-      !equal?(candidate) && anagram?(candidate)
+      candidate = candidate.downcase
+      candidate != word && candidate.split('').sort == letters
     end
-  end
-
-  private
-
-  def equal?(candidate)
-    candidate.downcase == @word.downcase
-  end
-
-  def anagram?(candidate)
-    candidate.downcase.chars.sort == @word.downcase.chars.sort
   end
 end
