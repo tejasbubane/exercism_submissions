@@ -1,7 +1,5 @@
 defmodule GuessingGame do
-  def compare(_secret_number) do
-    "Make a guess"
-  end
+  def compare(secret_number, guess \\ :no_guess)
 
   def compare(_secret_number, :no_guess) do
     "Make a guess"
