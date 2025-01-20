@@ -18,21 +18,15 @@ defmodule HighSchoolSweetheart do
      **         ** **         **
     **            *            **
     **                         **
-    """ <>
-      "**     " <>
-      initials(full_name1) <>
-      "  +  " <>
-      initials(full_name2) <>
-      "     **\n" <>
-      """
-       **                       **
-         **                   **
-           **               **
-             **           **
-               **       **
-                 **   **
-                   ***
-                    *
-      """
+    **     #{initials(full_name1)}  +  #{initials(full_name2)}     **
+     **                       **
+       **                   **
+         **               **
+           **           **
+             **       **
+               **   **
+                 ***
+                  *
+    """
   end
 end
