@@ -14,5 +14,6 @@ javascript/*/yarn-error.log
 erlang/*/_build/
 ocaml/**/_build/
 haskell/**/.stack-work
+python/**/__pycache__/*
 
 metadata.json
